@@ -52,7 +52,8 @@
                             {{ tab.label }}
                         </template>
                         <ArticleList v-show="isSelectedTab(tabKey_list_article)" />
-                        <CategorieParamsForm
+                        <MoveCategoryForm v-show="isSelectedTab(tabKey_move_article)" />
+                        <CategoryParamsForm
                             v-show="isSelectedTab(tabKey_params)"
                         />
                     </b-tab>
@@ -69,19 +70,24 @@
 
 <script>
 import CategorieNav from "@/components/CategorieNav.vue";
-import CategorieParamsForm from "@/components/CategorieParamsForm.vue";
+import MoveCategoryForm from "@/components/MoveCategoryForm.vue";
+import CategoryParamsForm from "@/components/CategoryParamsForm.vue";
 import ArticleList from "@/components/ArticleList.vue";
 import { BDropdown, BDropdownItem, BDropdownDivider } from "bootstrap-vue";
 import BuyNow from "@/components/BuyNow.vue";
 import ScrollToTop from "@core/components/scroll-to-top/ScrollToTop.vue";
 import { BTabs, BTab, BCardText } from "bootstrap-vue";
+import Ripple from 'vue-ripple-directive'
+
 const tabKey_list_article = "list-article";
 const tabKey_move_article = "move-article";
 const tabKey_params = "params";
 export default {
     components: {
+        Ripple,
         CategorieNav,
-        CategorieParamsForm,
+        MoveCategoryForm,
+        CategoryParamsForm,
         ArticleList,
         ScrollToTop,
         BuyNow,
@@ -114,7 +120,7 @@ export default {
             tabKey_move_article,
             tabKey_params,
             currentTab: null,
-            tabIndex: 0,
+            tabIndex: 1,
         };
     },
     mounted() {
