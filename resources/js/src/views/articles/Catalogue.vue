@@ -2,7 +2,7 @@
     <!-- :class="[skinClasses]" -->
     <div class="h-100">
         <!-- form head -->
-        <div class="d-flex justify-content-center back-default py-4 mb-3">
+        <div class="d-flex justify-content-center back-default py-4 mb-3 rounded-10">
             <div class="d-flex flex-column">
                 <!-- <div class="text-center mt-2 text-white"><strong>Gestion des catalogues</strong></div> -->
                 <div class="text-center text-white h1">
@@ -19,6 +19,7 @@
                     <b-dropdown
                         variant="flat-light"
                         class="border-default text-white"
+                        menu-class="w-100"
                     >
                         <template
                             #button-content
@@ -39,20 +40,19 @@
             <!-- side navigation -->
             <CategorieNav />
 
-           
-
             <!-- content -->
             <div class="col-9 card py-2">
                 <b-tabs fill @input="onTabChange()" v-model="tabIndex">
-                    <b-tab
-                        v-for="(tab,i) in tabs"
-                        :key="'tab'+i"
-                    >
+                    <b-tab v-for="(tab, i) in tabs" :key="'tab' + i">
                         <template #title>
                             {{ tab.label }}
                         </template>
-                        <ArticleList v-show="isSelectedTab(tabKey_list_article)" />
-                        <MoveCategoryForm v-show="isSelectedTab(tabKey_move_article)" />
+                        <ArticleList
+                            v-show="isSelectedTab(tabKey_list_article)"
+                        />
+                        <MoveCategoryForm
+                            v-show="isSelectedTab(tabKey_move_article)"
+                        />
                         <CategoryParamsForm
                             v-show="isSelectedTab(tabKey_params)"
                         />
@@ -77,14 +77,13 @@ import { BDropdown, BDropdownItem, BDropdownDivider } from "bootstrap-vue";
 import BuyNow from "@/components/BuyNow.vue";
 import ScrollToTop from "@core/components/scroll-to-top/ScrollToTop.vue";
 import { BTabs, BTab, BCardText } from "bootstrap-vue";
-import Ripple from 'vue-ripple-directive'
+import Ripple from "vue-ripple-directive";
 
 const tabKey_list_article = "list-article";
 const tabKey_move_article = "move-article";
 const tabKey_params = "params";
 export default {
     components: {
-        Ripple,
         CategorieNav,
         MoveCategoryForm,
         CategoryParamsForm,
@@ -97,6 +96,9 @@ export default {
         BTabs,
         BCardText,
         BTab,
+    },
+    directives: {
+        Ripple,
     },
     // ! We can move this computed: layout & contentLayoutType once we get to use Vue 3
     // Currently, router.currentRoute is not reactive and doesn't trigger any change
@@ -120,7 +122,7 @@ export default {
             tabKey_move_article,
             tabKey_params,
             currentTab: null,
-            tabIndex: 1,
+            tabIndex: 0,
         };
     },
     mounted() {
@@ -132,8 +134,8 @@ export default {
             return this.currentTab && this.currentTab.key === key;
         },
         onTabChange(evt) {
-          console.log(evt);
-          console.log(this.tabIndex);
+            console.log(evt);
+            console.log(this.tabIndex);
             this.currentTab = this.tabs[this.tabIndex];
         },
     },
