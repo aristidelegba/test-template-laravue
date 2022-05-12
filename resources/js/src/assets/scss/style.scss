@@ -1,0 +1,29 @@
+/*================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.rounded-default {
+    border-radius: 30px !important;
+}
+
+.border-default {
+    border: 2px solid white;
+    border-radius: 10px !important;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-default {
+    background-color: #7367f0;
+}
+
+.color-default {
+    color: #7367f0;
+}
