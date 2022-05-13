@@ -79,9 +79,11 @@ import ScrollToTop from "@core/components/scroll-to-top/ScrollToTop.vue";
 import { BTabs, BTab, BCardText } from "bootstrap-vue";
 import Ripple from "vue-ripple-directive";
 
+
 const tabKey_list_article = "list-article";
 const tabKey_move_article = "move-article";
 const tabKey_params = "params";
+
 export default {
     components: {
         CategorieNav,
@@ -100,8 +102,7 @@ export default {
     directives: {
         Ripple,
     },
-    // ! We can move this computed: layout & contentLayoutType once we get to use Vue 3
-    // Currently, router.currentRoute is not reactive and doesn't trigger any change
+
     data() {
         return {
             tabs: [
@@ -122,7 +123,7 @@ export default {
             tabKey_move_article,
             tabKey_params,
             currentTab: null,
-            tabIndex: 0,
+            tabIndex: 2,
         };
     },
     mounted() {
@@ -134,8 +135,6 @@ export default {
             return this.currentTab && this.currentTab.key === key;
         },
         onTabChange(evt) {
-            console.log(evt);
-            console.log(this.tabIndex);
             this.currentTab = this.tabs[this.tabIndex];
         },
     },

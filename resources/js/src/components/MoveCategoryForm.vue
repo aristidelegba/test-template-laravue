@@ -1,9 +1,8 @@
 <template>
     <div class="shadow-sm bg-white rounded p-2">
-        <div class="header">
-            <h1 class="color-default">Rechercher des articles</h1>
-            <div class="custom-separator-h"></div>
-        </div>
+        
+        <CategoryFormHeader  :title="'Rechercher des articles'"/>
+        
 
         <form @submit.prevent="() => {}" class="my-2">
             <div class="row">
@@ -100,6 +99,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import CategoryFormHeader from '@/components/ui/CategoryFormHeader.vue'
 import vSelect from "vue-select";
 import {
     BDropdown,
@@ -117,6 +117,7 @@ export default {
         BDropdownItem,
         BDropdownDivider,
         vSelect,
+        CategoryFormHeader
     },
       directives: {
     Ripple,
@@ -153,17 +154,5 @@ form{
         font-weight: bold;
     }
 }
-.input-ctn {
-    border-radius: 10px !important;
-    box-shadow: 1px 2px 6px #0000002b !important;
-    height: fit-content;
 
-    &.dd:hover {
-        background-color: rgba(75, 75, 75, 0.12);
-    }
-
-    input {
-        border: none;
-    }
-}
 </style>

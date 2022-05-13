@@ -37,3 +37,19 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
     background: #0000002e;
     width: 100%;
 }
+
+.input-ctn {
+    border-radius: 10px !important;
+    box-shadow: 1px 2px 6px #0000002b !important;
+    height: fit-content;
+    &.dd:hover {
+        background-color: rgba(75, 75, 75, 0.12);
+    }
+    input {
+        border: none;
+    }
+}
+
+.shadow-default {
+    box-shadow: 1px 2px 6px #0000002b !important;
+}
