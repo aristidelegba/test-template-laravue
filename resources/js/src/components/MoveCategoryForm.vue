@@ -1,12 +1,10 @@
 <template>
     <div class="shadow-sm bg-white rounded p-2">
-        
-        <CategoryFormHeader  :title="'Rechercher des articles'"/>
-        
+        <CategoryFormHeader :title="'Rechercher des articles'" />
 
         <form @submit.prevent="() => {}" class="my-2">
             <div class="row">
-                <div class="col-6">
+                <div class="col-sm-6">
                     <div class="form-row form-group">
                         <label
                             for="libelle"
@@ -19,7 +17,7 @@
                                 :dir="
                                     $store.state.appConfig.isRTL ? 'rtl' : 'ltr'
                                 "
-                                label="title"
+                                label="label"
                                 :options="labels"
                             />
                         </div>
@@ -37,7 +35,7 @@
                                 :dir="
                                     $store.state.appConfig.isRTL ? 'rtl' : 'ltr'
                                 "
-                                label="title"
+                                label="label"
                                 :options="categories"
                             />
                         </div>
@@ -59,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-sm-6">
                     <div class="form-row form-group">
                         <label
                             for="libelle"
@@ -82,15 +80,19 @@
                     </div>
                 </div>
 
-                <div class="col-12 text-right ">
+                <div class="col-12 text-right">
                     <button
                         class="btn btn-outline-dark rounded-10 mr-1"
                         v-ripple.400="'rgba(30, 30, 30, 0.15)'"
-                    > Annuler</button>
+                    >
+                        Annuler
+                    </button>
                     <button
                         class="btn btn-success text-uppercase rounded-10"
                         v-ripple.400="'rgba(30, 30, 30, 0.15)'"
-                    > Rechercher</button>
+                    >
+                        Rechercher
+                    </button>
                 </div>
             </div>
         </form>
@@ -98,8 +100,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import CategoryFormHeader from '@/components/ui/CategoryFormHeader.vue'
+import { mapGetters } from "vuex";
+import CategoryFormHeader from "@/components/ui/CategoryFormHeader.vue";
 import vSelect from "vue-select";
 import {
     BDropdown,
@@ -117,42 +119,35 @@ export default {
         BDropdownItem,
         BDropdownDivider,
         vSelect,
-        CategoryFormHeader
+        CategoryFormHeader,
     },
-      directives: {
-    Ripple,
-  },
+    directives: {
+        Ripple,
+    },
     data() {
         return {
             selectedLabel: {},
             selectedCategory: {},
-            labels: [
-                { title: "Square" },
-                { title: "Rectangle" },
-                { title: "Rombo" },
-                { title: "Romboid" },
-            ],
-            categories: [
-                { title: "LMB" },
-                { title: "Example" },
-                { title: "example" },
-                { title: "example" },
-            ],
         };
     },
     mounted() {
-        this.selectedLabel = this.labels[0];
-        this.selectedCategory = this.categories[0];
+        this.selectedLabel = this.labels && this.labels[0];
+        this.selectedCategory = this.categories && this.categories[0];
     },
     methods: {},
+    computed: {
+        ...mapGetters("fake", {
+            labels: "getter_listLabels",
+            categories: "getter_listCategories",
+        }),
+    },
 };
 </script>
 <style lang="scss" scoped>
 @import "~@core/scss/vue/libs/vue-select.scss";
-form{
-    label{
+form {
+    label {
         font-weight: bold;
     }
 }
-
 </style>

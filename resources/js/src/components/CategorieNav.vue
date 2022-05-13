@@ -33,45 +33,11 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
     name: "CategorieNav",
     data() {
-        return {
-            categories: [
-                {
-                    label: "ERP",
-                },
-                {
-                    label: "maintenance",
-                },
-                {
-                    label: "reseaux",
-                },
-                {
-                    label: "web",
-                },
-                {
-                    label: "telecoms",
-                    children: [
-                        {
-                            label: "innovations",
-                        },
-                    ],
-                },
-                {
-                    label: "equipements",
-                    children: [
-                        {
-                            label: "systeme",
-                        },
-                    ],
-                },
-                {
-                    label: "charges",
-                },
-            ],
-        };
+        return {};
     },
     methods: {
         ...mapActions({
@@ -80,6 +46,11 @@ export default {
         onClickOnLink(link) {
             this.onCategoriesNavChanges({ link });
         },
+    },
+    computed: {
+        ...mapGetters("fake", {
+            categories: "getter_listCategories",
+        }),
     },
 };
 </script>

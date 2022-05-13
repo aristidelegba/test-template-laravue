@@ -1,41 +1,161 @@
 <template>
-    <div class="form-ctn">
-        <!-- informations principales -->
+    <div class="form-ctn p-2">
+        <!-- Imformations principales -->
         <div class="form-bloc bordered">
             <CategoryFormHeader :title="'INFORMATIONS PRINCIPALES'" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-row form-group">
+                        <label
+                            for="libelle"
+                            class="col-md-4 col-form-label font-bold"
+                            >Libelle de l'article</label
+                        >
+                        <div class="col-8 input-ctn dd">
+                            <v-select
+                                v-model="form.selectedLabel"
+                                label="label"
+                                :options="labels"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <label
+                            for="libelle"
+                            class="col-md-4 col-form-label font-bold"
+                            >Categories <br />
+                            ( Catalogue generale)</label
+                        >
+                        <div class="col input-ctn">
+                            <v-select
+                                v-model="form.selectedCategory"
+                                label="label"
+                                :options="categories"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <label
+                            for="author"
+                            class="col-md-4 col-form-label font-bold"
+                            >Categories ( Catalogue generale)</label
+                        >
+                        <div class="col">
+                            <b-form-checkbox
+                                checked="true"
+                                class="custom-control-primary"
+                                name="check-button"
+                                switch
+                                size="lg"
+                                v-model="form.author"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-row form-group">
+                        <label
+                            for="libelle"
+                            class="col-md-4 col-form-label font-bold"
+                            >Libelle</label
+                        >
+                        <div class="col input-ctn">
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <label
+                            for="libelle"
+                            class="col-md-4 col-form-label font-bold"
+                            >Reference</label
+                        >
+                        <div class="col input-ctn">
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <label
+                            for="libelle"
+                            class="col-md-4 col-form-label font-bold"
+                            >Duree de vie</label
+                        >
+                        <div class="col input-ctn ddv">
+                            <div class="">
+                                <input
+                                    type="number"
+                                    v-model="form.dureeDeVie.value"
+                                    name="ddv-value"
+                                    id=""
+                                />
+                            </div>
+                            <div class="">
+                                <select
+                                    name="ddv-duration"
+                                    id=""
+                                    v-model="form.dureeDeVie.duration"
+                                >
+                                    <option
+                                        :value="value"
+                                        v-for="(value, i) in ['An(s)', 'Mois']"
+                                        :key="'ddv-' + i"
+                                    >
+                                        {{ value }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 text-right">
+                    <button
+                        class="btn btn-outline-dark rounded-10 mr-1"
+                        v-ripple.400="'rgba(30, 30, 30, 0.15)'"
+                    >
+                        Annuler
+                    </button>
+                    <button
+                        class="btn btn-success text-uppercase rounded-10"
+                        v-ripple.400="'rgba(30, 30, 30, 0.15)'"
+                    >
+                        Rechercher
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import { BDropdown, BDropdownItem, BDropdownDivider } from "bootstrap-vue";
-import ScrollToTop from "@core/components/scroll-to-top/ScrollToTop.vue";
 import CategoryFormHeader from "@/components/ui/CategoryFormHeader.vue";
-
+import { mapGetters } from "vuex";
+import vSelect from "vue-select";
 import {
-    BFormInput,
-    BRow,
-    BCol,
-    BFormGroup,
-    BFormSelect,
-    BCardText,
-    BFormTextarea,
+    BDropdown,
+    BDropdownItem,
+    BDropdownDivider,
+    BFormCheckbox,
 } from "bootstrap-vue";
-
-import BCardCode from "@core/components/b-card-code/BCardCode.vue";
-// import flatPickr from 'vue-flatpickr-component'
-
-import { VueEditor } from "vue2-editor";
 
 export default {
     name: "CategorieParamsForm",
     components: {
         CategoryFormHeader,
+        vSelect,
+        BFormCheckbox,
     },
-    // ! We can move this computed: layout & contentLayoutType once we get to use Vue 3
-    // Currently, router.currentRoute is not reactive and doesn't trigger any change
+
     data() {
         return {
+            form: {
+                selectedLabel: null,
+                selectedCategory: null,
+                author: "",
+                dureeDeVie: {
+                    value: 10,
+                    duration: "Mois",
+                },
+            },
             selected: null,
             type: "produit",
             options: [
@@ -143,13 +263,10 @@ export default {
         };
     },
     computed: {
-        layout() {
-            if (this.$route.meta.layout === "full") return "layout-full";
-            return `layout-${this.contentLayoutType}`;
-        },
-        contentLayoutType() {
-            return this.$store.state.appConfig.layout.type;
-        },
+        ...mapGetters("fake", {
+            labels: "getter_listLabels",
+            categories: "getter_listCategories",
+        }),
     },
     methods: {
         filesChange(name, file) {
@@ -161,4 +278,27 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.form-ctn {
+    .form-card {
+        &.bordered {
+            border: 2px solid;
+        }
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 24px 0 rgb(0 0 0 / 7%);
+    }
+}
+
+.ddv{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    input{
+        padding: 10px;
+    background: $colorPrimary;
+    width: 100px;
+    }
+}
+</style>

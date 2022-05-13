@@ -2,7 +2,7 @@
     <!-- :class="[skinClasses]" -->
     <div class="h-100">
         <!-- form head -->
-        <div class="d-flex justify-content-center back-default py-4 mb-3 rounded-10">
+        <div class="d-flex justify-content-center bg-default py-4 mb-3 rounded-10">
             <div class="d-flex flex-column">
                 <!-- <div class="text-center mt-2 text-white"><strong>Gestion des catalogues</strong></div> -->
                 <div class="text-center text-white h1">

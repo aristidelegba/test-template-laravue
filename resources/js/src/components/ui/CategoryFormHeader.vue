@@ -1,6 +1,6 @@
 <template>
-    <div class="header">
-        <h1 class="color-default">Rechercher des articles</h1>
+    <div class="header mt-1 mb-2">
+        <h1 class="color-default">{{title}}</h1>
         <div class="custom-separator-h"></div>
     </div>
 </template>

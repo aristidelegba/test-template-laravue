@@ -8,6 +8,7 @@ import appConfig from './app-config'
 import verticalMenu from './vertical-menu'
 import catalogue from './catalogue'
 import article from './article'
+import fake from './fake'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
         verticalMenu,
         'app-ecommerce': ecommerceStoreModule,
         catalogue,
-        article
+        article,
+        fake
     },
     strict: process.env.DEV,
 
