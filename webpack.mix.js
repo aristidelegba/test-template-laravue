@@ -82,5 +82,3 @@ mix.webpackConfig({
         chunkFilename: 'js/chunks/[name].[chunkhash].js'
     }
 })
-
-mix.browserSync('localhost');
